@@ -1,0 +1,22 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:prettier/recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2019
+  },
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "rules": {
+    "eqeqeq": "error",
+    "handle-callback-err": "error",
+    "comma-dangle": ["error", "never"],
+    "eol-last": ["error", "always"],
+    "key-spacing": ["error", { "afterColon": true }],
+    "no-unused-vars": ["error", { "args": "none" }],
+    "semi": ["error", "never"]
+  }
+}
