@@ -11,21 +11,23 @@ exports.scheduledFunction = functions.pubsub
   .onRun(async (context) => {
     console.log('This will be run every day 00:00! 😊🎉🇹🇭')
     const item = await checkStock()
-    const a = await notify(item.data)
+    if (item.length > 0)
+      await notify(`Item nearly or out of stock\n\n${ck
+        .map((l, i) => {
+          return `${l.location}\n${l.nearlyOutOfStock.join('\n')}\n=====\n`
+        })
+        .join('\n')}
+      `)
 
     return null
   })
-
-// TODO: send request to Backend API for check item in stock
-// If item less then 10 > send notification to admin
-// else nothing
 
 const checkStock = async () => {
   return new Promise((resolve, reject) => {
     request(
       {
         method: 'GET',
-        url: 'https://mocki.io/v1/09ad4501-74c4-4161-add4-6589e26ebfd2'
+        url: 'https://vending-machine-service.herokuapp.com/admin/check-quantity'
       },
       (error, response, body) => {
         if (error) reject()
