@@ -7,14 +7,14 @@ const TOKEN = 'nKIfMWswGTVhOfhHdUV4yV2x6dVSGtrsM6Tl241omjQ'
 // https://firebase.google.com/docs/functions/write-firebase-functions
 
 exports.scheduledFunction = functions.pubsub
-  .schedule('every 1 hours')
+  .schedule('every 30 mins')
   .onRun(async (context) => {
-    console.log('This will be run every 1 hours! 😊🎉🇹🇭')
+    console.log('This will be run every 30 mins! 😊🎉🇹🇭')
     const item = await checkStock()
     if (item.length > 0)
-      await notify(`Item nearly or out of stock\n\n${item
+      await notify(`Item nearly or out of stock ⚠️\n\n${item
         .map((l, i) => {
-          return `${l.location}\n${l.nearlyOutOfStock.join('\n')}\n=====\n`
+          return `📍 ${l.location}\n${l.nearlyOutOfStock.join('\n')}\n=====\n`
         })
         .join('\n')}
       `)
